@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Man10BeaconProtect1 : JavaPlugin() , Listener{
 
-    val prefix = "[§eMan10§5BP§r]"
+    val prefix = "[§eMan10§bBP§r]"
 
     override fun onEnable() {
         // Plugin startup logic
@@ -39,7 +39,7 @@ class Man10BeaconProtect1 : JavaPlugin() , Listener{
 
         this.addPermission(e.player,beaconstate)
 
-        e.player.sendMessage( prefix + "ビーコンを設置しました")
+        e.player.sendMessage( prefix + "ビーコンを保護しました")
     }
     @EventHandler
     fun clickBeaconEvent(e: PlayerInteractEvent) {
@@ -56,8 +56,6 @@ class Man10BeaconProtect1 : JavaPlugin() , Listener{
 
         val p = e.player
 
-        e.isCancelled = true
-
         if (!this.hasPermission(p,beaconstate)) {
             p.sendMessage(prefix + "§cあなたはこのビーコンを開く権限がありません！")
             e.isCancelled = true
@@ -66,6 +64,8 @@ class Man10BeaconProtect1 : JavaPlugin() , Listener{
     }
     @EventHandler
     fun breakBeaconEvent(e: BlockBreakEvent) {
+
+        if (e.player.hasPermission("man10beaconprotect.op")) return
 
         val block = e.block
 
