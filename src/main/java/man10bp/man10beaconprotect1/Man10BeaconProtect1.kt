@@ -4,6 +4,7 @@ import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.block.Beacon
 import org.bukkit.entity.Player
+import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -14,8 +15,12 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
 
 class Man10BeaconProtect1 : JavaPlugin() , Listener{
+
+    val prefix = "[§eMan10§5BP§r]"
+
     override fun onEnable() {
         // Plugin startup logic
+        server.pluginManager.registerEvents(this,this)
     }
 
     override fun onDisable() {
@@ -34,7 +39,7 @@ class Man10BeaconProtect1 : JavaPlugin() , Listener{
 
         this.addPermission(e.player,beaconstate)
 
-        e.player.sendMessage("デバッグ用")
+        e.player.sendMessage( prefix + "ビーコンを設置しました")
     }
     @EventHandler
     fun clickBeaconEvent(e: PlayerInteractEvent) {
@@ -54,7 +59,7 @@ class Man10BeaconProtect1 : JavaPlugin() , Listener{
         e.isCancelled = true
 
         if (!this.hasPermission(p,beaconstate)) {
-            p.sendMessage("§cあなたはこのビーコンを開く権限がありません！")
+            p.sendMessage(prefix + "§cあなたはこのビーコンを開く権限がありません！")
             e.isCancelled = true
             return
         }
@@ -73,7 +78,7 @@ class Man10BeaconProtect1 : JavaPlugin() , Listener{
         val p = e.player
 
         if (!this.hasPermission(p,state)){
-            p.sendMessage("§cあなたはこのビーコンを壊す権限がありません")
+            p.sendMessage(prefix + "§cあなたはこのビーコンを壊す権限がありません")
             e.isCancelled = true
             return
         }
