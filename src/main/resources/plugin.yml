@@ -1,0 +1,4 @@
+name: Man10BeaconProtect1
+version: @version@
+main: man10bp.man10beaconprotect1.Man10BeaconProtect1
+api-version: 1.16
