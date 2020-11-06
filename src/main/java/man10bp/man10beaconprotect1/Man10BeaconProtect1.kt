@@ -67,6 +67,8 @@ class Man10BeaconProtect1 : JavaPlugin() , Listener{
 
         if (e.player.hasPermission("man10beaconprotect.op")) return
 
+        if (e.player.name != "") return
+
         val block = e.block
 
         if (block.type != Material.BEACON)return
